@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import Layout from "./layout/Layout"
+
+import Dashboard from "./pages/Dashboard"
+import Students from "./pages/Students"
+import Classes from "./pages/Classes"
+
+// 🆕 NEW PAGES
+import Subjects from "./pages/Subjects"
+import Timetable from "./pages/Timetable"
+import Notes from "./pages/Notes"
+import Bulletin from "./pages/Bulletin"
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+
+          {/* MAIN */}
+          <Route index element={<Dashboard />} />
+
+          {/* EXISTING */}
+          <Route path="students" element={<Students />} />
+          <Route path="classes" element={<Classes />} />
+
+          {/* 🆕 NEW */}
+          <Route path="subjects" element={<Subjects />} />
+
+          <Route path="timetable" element={<Timetable />} />
+
+          <Route path="notes" element={<Notes />} />
+          <Route path="bulletin/:id"element={<Bulletin />}/>
+
+          
+
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  )
 }
 
-export default App;
+export default App
