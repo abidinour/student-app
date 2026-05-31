@@ -1,42 +1,116 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
+
 import Layout from "./layout/Layout"
 
 import Dashboard from "./pages/Dashboard"
 import Students from "./pages/Students"
 import Classes from "./pages/Classes"
-
-// 🆕 NEW PAGES
 import Subjects from "./pages/Subjects"
 import Timetable from "./pages/Timetable"
 import Notes from "./pages/Notes"
 import Bulletin from "./pages/Bulletin"
+import Login from "./pages/Login"
+import StudentDashboard from "./pages/StudentDashboard"
 
+import AdminRoute from "./routes/AdminRoute"
+import StudentRoute from "./routes/StudentRoute"
 
 function App() {
   return (
     <BrowserRouter>
+
       <Routes>
-        <Route path="/" element={<Layout />}>
 
-          {/* MAIN */}
-          <Route index element={<Dashboard />} />
+        {/* LOGIN */}
+        <Route
+          path="/"
+          element={<Login />}
+        />
 
-          {/* EXISTING */}
-          <Route path="students" element={<Students />} />
-          <Route path="classes" element={<Classes />} />
+        {/* LAYOUT */}
+        <Route
+          path="/"
+          element={<Layout />}
+        >
 
-          {/* 🆕 NEW */}
-          <Route path="subjects" element={<Subjects />} />
+          {/* ADMIN ROUTES */}
 
-          <Route path="timetable" element={<Timetable />} />
+          <Route
+            path="dashboard"
+            element={
+              <AdminRoute>
+                <Dashboard />
+              </AdminRoute>
+            }
+          />
 
-          <Route path="notes" element={<Notes />} />
-          <Route path="bulletin/:id"element={<Bulletin />}/>
+          <Route
+            path="students"
+            element={
+              <AdminRoute>
+                <Students />
+              </AdminRoute>
+            }
+          />
 
-          
+          <Route
+            path="classes"
+            element={
+              <AdminRoute>
+                <Classes />
+              </AdminRoute>
+            }
+          />
+
+          <Route
+            path="subjects"
+            element={
+              <AdminRoute>
+                <Subjects />
+              </AdminRoute>
+            }
+          />
+
+          <Route
+            path="timetable"
+            element={
+              <AdminRoute>
+                <Timetable />
+              </AdminRoute>
+            }
+          />
+
+          <Route
+            path="notes"
+            element={
+              <AdminRoute>
+                <Notes />
+              </AdminRoute>
+            }
+          />
+
+          {/* STUDENT ROUTE */}
+
+          <Route
+            path="student-dashboard"
+            element={
+              <StudentRoute>
+                <StudentDashboard />
+              </StudentRoute>
+            }
+          />
+
+          {/* SHARED ROUTE */}
+
+          <Route
+            path="bulletin/:id"
+            element={<Bulletin />}
+          />
 
         </Route>
+
       </Routes>
+
     </BrowserRouter>
   )
 }
